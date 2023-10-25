@@ -1,0 +1,9 @@
+12/10/2023
+#แก้แผน match ui ให้ท้ายๆ ให้ pir sensor ความสัมพันธ์กับ ip cam
+#ใช้รูป 10คน 5คนเป็นmember 5 person not member
+ให้สรุปเป็นตารางว่าประมวลผลเป็นmember กี่คน not member กี่คน
+not member เป็น member กี่คน เป็น not member กี่คน
+report implement ให้ใส่ตามแผน ux/ui database PostgreSQL
+
+19/10/2023 
+แสดง notify

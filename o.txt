@@ -1,0 +1,3 @@
+@app.route('/<dataset>')
+def dataset_page(dataset):
+    return render_template('output.html',dataset=dataset)

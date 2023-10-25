@@ -1,0 +1,20 @@
+{% extends "home.html" %}
+
+{% block content %}
+<h4 class="text-center text-danger">Notify</h4>
+<br>
+<h4 class="text-center">{{ notification[1] }}</h4>
+<br/>
+<p class="text-center">Date:{{notification[3]}}</p>
+<p class="text-center">Time:{{notification[4]}}</p>
+{% if notification[2] %}
+<img src="{{ url_for('static', filename='images/detection/' + notification[2]) }}" alt="Image" id="img" style="width: 400px; height: 300px;">
+{% endif %}
+
+<style>
+    #img {
+        display: block; /* ทำให้รูปภาพเป็น block element */
+        margin: 0 auto; /* จัดตำแหน่งให้อยู่ตรงกลางแนวนอน */
+      }
+</style>
+{% endblock %}

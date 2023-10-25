@@ -1,0 +1,22 @@
+ {% comment %} <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0000FF">
+        <br/>
+        <img src="static/images/PSU.png" class="PSU-logo" alt="Responsive image" href="/home">
+        <div class="container-fluid">
+            <a href="/home" class="navbar-brand text-danger"> <h4 class=" text-danger">Dormitory PSU</h4></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse2">
+                <div class="navbar-nav">
+                    <a href="/overview" class="nav-item nav-link active text-white">Overview</a>
+                    <a href="/video" class="nav-item nav-link  text-white">Video</a>
+                    <a href="/member" class="nav-item nav-link  text-white">Member</a>
+                    <a href="/notify" class="nav-item nav-link  text-white">Notify</a>
+                </div>
+                <form class="d-flex ms-auto">
+                    <input type="text" class="form-control me-sm-2" placeholder="Search">
+                    <a href="/" class="nav-item nav-link  text-white">Logout</a>
+                </form>
+            </div>
+        </div>        
+    </nav> {% endcomment %}

@@ -1,0 +1,13 @@
+{% extends "home.html" %}
+
+{% block content %}
+<br/>
+<h2 class="text-center">Video</h2>
+<br/>
+
+       
+<div class="d-flex justify-content-center" style="min-height: 100vh;">
+    <img src="{{ url_for('video_feed') }} " width="360" height="360"frame rate="15"
+    autoplay loop muted class="block-border">
+</div>
+{% endblock %}

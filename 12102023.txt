@@ -1,0 +1,11 @@
+12/10/2023
+#แก้แผน match ui ให้ท้ายๆ ให้ pir sensor ความสัมพันธ์กับ ip cam
+#ใช้รูป 10คน 5คนเป็นmember 5 person not member
+ให้สรุปเป็นตารางว่าประมวลผลเป็นmember กี่คน not member กี่คน
+not member เป็น member กี่คน เป็น not member กี่คน
+
+19/10/2023
+PIR Sensors MQTT TO WEB
+Report Line Notify
+ใส่หัวข้อแยกรูป
+ปรับcodeตรง notify ว่าจะalert ไปรูปไหน

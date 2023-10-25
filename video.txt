@@ -1,0 +1,116 @@
+@app.route('/video')
+def video():
+    if 'username' in session:
+        username = session['username']
+        user_id = session['user_id']
+        name=session['name']
+        lastname=session['lastname']
+        notifications=get_notifications()
+        count=get_data_notifications(user_id)
+        return render_template('video.html',notifications=notifications,name=session['name'],lastname=session['lastname'],count=count)
+    else:
+        return redirect(url_for('login'))
+    
+
+def generate_frames():
+    encodingsP = 'recognizer/trainer.yml'
+    print('[INFO] Load Encodings+Face...')
+    data = pickle.loads(open(encodingsP, 'rb').read())
+    camera = cv2.VideoCapture(0)
+    
+    # def insert(name_lastname,imgdetect,dmy,times):
+    #   conn=psycopg2.connect(
+    #                 database="dormitory",user="postgres",password="1234",host="localhost",
+    #                 port="5432"
+    #   )
+    #   conn.autocommit = True
+    #   cursor=conn.cursor()
+    #   cmd="INSERT INTO overview(name_lastname,imgdetect,dmy,times) VALUES(%s,%s,%s,%s)"
+    #   cursor.execute(cmd,(name_lastname,imgdetect,dmy,times,))
+    #   cursor.close()
+    #   conn.close()
+
+
+    while True:
+        ret, frame = camera.read()
+    
+        if not ret:
+            print("Error: Could not read from the camera.")
+            break
+
+    # Face detection
+        boxes = face_recognition.face_locations(frame)
+        encodings = face_recognition.face_encodings(frame, boxes)
+    
+        names = []
+        confidences = []  # To store confidence values
+    
+        for encoding in encodings:
+        # Calculate face distances (confidences) for each known encoding
+            face_distances = face_recognition.face_distance(data['encodings'], encoding)
+        
+        # Find the index of the known encoding with the smallest distance (highest confidence)
+            # min_distance_idx = face_distances.argmin()
+            min_distance_idx = face_distances.argmin()
+        
+            if face_distances[min_distance_idx] <= 0.45:  # You can adjust this threshold as needed
+                name = data['names'][min_distance_idx]
+                confidence = (1 - face_distances[min_distance_idx])*100  # Confidence is 1 minus distance
+          
+            else:
+                name = 'Not member'
+                confidence = 0
+        
+            names.append(name)
+            
+            confidences.append(confidence)
+    
+    # Process detected faces and save images
+        for ((top, right, bottom, left), name, confidence) in zip(boxes, names, confidences):
+            cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+            text = f"{name} ({confidence:.0f})" if confidence is not None else name
+            cv2.putText(frame,text, (left, bottom + 50), cv2.FONT_HERSHEY_COMPLEX, 0.8, 
+                        (0, 0, 255), 2)
+            # current_datetime = datetime.datetime.now()
+            # date_string = current_datetime.strftime("%d%m%Y")
+            # time_string =current_datetime.strftime("%H%M%S")
+            # print(name)
+            # name_lastname=name
+            # print(date_string)
+            # print(time_string)
+            # time.sleep(30)
+            # img_name = "static/images/detection/"+ name +'_'+date_string+'_'+time_string+".jpg"
+            # cv2.imwrite(img_name, frame)
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+    
+            yield (
+                b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
+            )
+            # current_datetime = datetime.datetime.now()
+            # date_string = current_datetime.strftime("%d%m%Y")
+            # time_string =current_datetime.strftime("%H%M%S")
+            # print(name)
+            # name_lastname=name
+            # print(date_string)
+            # print(time_string)
+            # time.sleep(30)
+            # img_name = "static/images/detection/"+ name +'_'+date_string+'_'+time_string+".jpg"
+            # cv2.imwrite(img_name, frame)
+    #         with open(img_name, 'rb') as file:
+    #             image_data = {'imageFile': file}
+    #             data = {'message': message}
+
+    # # Send the message and image using a POST request
+    #             response = requests.post(url, headers=headers, data=data, files=image_data)
+
+    #         print(response.text)
+    # #         print(img_name)
+    #         imgdetect=name+'_'+date_string+'_'+time_string+'.jpg'
+    #         dmy = current_datetime.strftime("%Y-%m-%d")
+    #         times =current_datetime.strftime("%H:%M:%S")
+    #         insert(name_lastname,imgdetect,dmy,times)
+    #         time.sleep(30)
+    #      # Display the video in a window
+    camera.release()

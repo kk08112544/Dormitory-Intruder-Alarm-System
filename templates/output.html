@@ -1,0 +1,33 @@
+{% extends "home.html" %}
+
+{% block content %}
+<br>
+<h2 class="text-center">{{ dataset }}</h2>
+<br/>
+
+<div class="image-gallery">
+    {% for image_file in image_files %}
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/datasets/' + dataset + '/' + image_file) }}" alt="{{ image_file }}" class="gallery-image">
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .image-container {
+        width: 17%; /* Set the width to 20% to create 5 columns in a row */
+        margin: 10px; /* Adjust the margin as needed for spacing */
+    }
+
+    .gallery-image {
+        width: 70%; /* Set the width to 100% to make all images the same width */
+        height: 70%; /* Automatically adjust the height to maintain the aspect ratio */
+    }
+</style>
+{% endblock %}

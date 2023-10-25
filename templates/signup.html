@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <base target="_top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('index', filename='dev-app/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap-5.1.2-dist/css/bootstrap.min.css">
+    <script src="./bootstrap-5.1.2-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+        
+            .card{
+                position: relative;
+                height: 780px;
+                width: 360px;
+                background-image: linear-gradient(240deg,#95a5a6,#bdc3c7);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+                padding:40px;
+                display:flex;
+                flex-direction:column;
+                justify-content: center;
+                align-items: center;
+            }
+            .register{
+                position: absolute;
+                top:-40px;
+                left:55px;
+                height:80px;
+                width:250px;
+                background:#333;
+                color:#fff;
+                font-size:2rem;
+                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+            }
+            #logo{
+                font-size:7rem;
+                color:#333;
+                margin-bottom:40px;
+                transition:.5s;
+            }
+            .login-form{
+                position:relative;
+                height: 50px;
+                width: 100%;
+                background: #fff;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+            }
+            .login-form span::before{
+                content:attr(data-placeholder);
+                position: absolute;
+                top:30%;
+                left:30%;
+                color:#bdc3c7;
+                transition: .5s;
+                opacity: 1;
+            }
+            #logo-input{
+                margin: 0 20px;
+                padding-right: 20px;
+                font-size: 1.5rem;
+                border-right: 2px solid #bdc3c7;
+                color:#bdc3c7;
+            }
+            .input{
+                height: 35px;
+                width:100%;
+                border:none;
+                font-size: 1.2rem;
+                outline: none;
+                background: transparent;
+                z-index:1;
+            }
+            .btn-submit{
+                margin: 20px 0;
+                padding: 15px 0;
+                width:100%;
+                border:none;
+                border-radius: 10px;
+                background-size:200%;
+                font-size:1.5rem;
+                color:#FBFCF8;
+                transition: 0.5s;
+                cursor:pointer;
+                background-color: #EB1111
+            }
+            .btn-submit:hover{
+                background-position: right;
+            }
+            .focus+span::before{
+                opacity: 0;
+            }
+            .PSU {
+                width: 200px; /* กำหนดความกว้าง */
+                height: 200px; /* กำหนดความสูง */
+              }
+            .PSU-logo {
+                width: 70px; /* กำหนดความกว้าง */
+                height: 100px; /* กำหนดความสูง */
+              }
+        </style>
+    </head>
+    <body  style="background-color: #0000FF">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <img src="static/images/PSU.png" class="PSU-logo" alt="Responsive image">
+                    <div class="navbar-nav ms-auto">
+                        <a href="/login" class="nav-item nav-link text-white ">Login</a>
+                        <a href="/signup" class="nav-item nav-link text-white ">Register</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <form action="{{url_for('login')}}" class="card" methods='POST'>
+                <div class="register">Register</div>
+                <br>
+                <img src="static/images/PSU_Logo.png" class="PSU" alt="Responsive image">
+                <br>
+                <br>
+                <div class="login-form">
+                    <i class="fa-solid fa-user" id="logo-input"></i>
+                     <input type="text" class="input" id="username">
+                     <span data-placeholder="username"></span>
+                </div>
+                <div class="login-form">
+                    <i class="fa-solid fa-user" id="logo-input"></i>
+                     <input type="text" class="input" id="username">
+                     <span data-placeholder="username"></span>
+                </div>
+                <div class="login-form">
+                    <i class="fa-solid fa-user" id="logo-input"></i>
+                     <input type="text" class="input" id="username">
+                     <span data-placeholder="username"></span>
+                </div>
+                <div class="login-form">
+                    <i class="fa-solid fa-user" id="logo-input"></i>
+                     <input type="text" class="input" id="username">
+                     <span data-placeholder="username"></span>
+                </div>
+                <div class="login-form">
+                    <i class="fa-solid fa-lock" id="logo-input"></i>
+                     <input type="password" class="input" id="password">
+                     <span data-placeholder="Password"></span>
+                </div>
+                <input type="submit" class="btn-submit" value="Register">
+            </form>   
+        </div>
+    </body>
+</html>

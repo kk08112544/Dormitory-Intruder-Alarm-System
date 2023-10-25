@@ -1,0 +1,163 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<br>
+<h2 class="text-center">Overview</h2>
+
+<br/>
+
+
+<form  method="POST" style="display: flex; justify-content: center;">
+    <input class="form-control"  type="date"id="search_date" name="search_date" style="width: 25%;" pattern="\d{4}-\d{2}-\d{2}" title="Enter a date in the format YYYY-MM-DD" required></input>
+    <input type="submit" style="margin-left: 10px; background-color: #DC143C; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+</form>
+
+<p class="text-center">{{search_date}}</p>
+
+<div class="container mt-5">
+    <table id="product-table" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name-Lastname</th>
+                <th>Image</th>
+                <th>Times</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product[0] }}</td>
+                <td>{{ product[1] }}</td>
+               
+                <td><a href="http://127.0.0.1:5000/static/images/detection/{{ product[2] }}" onclick="toggleImage('_01102023_103636.jpg')">
+                    {{ product[2] }}
+               
+                </a></td>
+                
+                
+                <td>{{ product[4] }}</td> 
+                <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#editTaskModal{{ product[0] }}">
+                    Edit
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ product[0] }}">
+                    Delete
+                </button>
+            </td>
+                
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Edit Task Modals -->
+{% for product in products %}
+<div class="modal fade" id="editTaskModal{{ product[0] }}" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel{{ product[0] }}" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<!-- Edit task modal content goes here -->
+<div class="modal-header">
+    <h5 class="modal-title" id="editTaskModalLabel{{ product[0] }}">Edit Overview ID {{product[0]}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <!-- Edit task form goes here -->
+    <form method="POST" action="/edit_product/{{ product[0] }}">
+       
+        <div class="form-group">
+            <label for="name_lastname">Name-Lastname</label>
+            <input type="text" class="form-control" id="name_lastname" name="name_lastname" value="{{ product[1] }}" required></input>
+        </div>
+        <div class="form-group">
+            <label for="imgdetect">Image Detection</label>
+            <input type="hidden" class="form-control" id="old_name" name="old_name" value="{{ product[2] }}">
+            <input type="text" class="form-control" id="imgdetect" name="imgdetect" value="{{ product[2] }} "oninput="restrictInput(this)" >
+ 
+
+            <br/>
+            <br/>
+            {% if product[2] %}
+                <img src="{{ url_for('static', filename='images/detection/' + product[2]) }}" alt="Image" id="yourImage">
+            {% endif %}
+
+               
+        </div>
+       
+        <div class="form-group">
+            <label for="times">Times</label>
+            <input type="text" class="form-control" id="times" name="times" value="{{ product[4] }}" required readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form> 
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+<!-- Delete Task Modals -->
+{% for product in products %}
+<div class="modal fade" id="deleteModal{{ product[0] }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="deleteModalLabel">Delete Overview ID {{product[0]}}</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+Are you sure you want to delete ID {{product[0]}}?
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<form action="/delete_product/{{ product[0] }}" method="POST">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+<!-- Include Bootstrap JavaScript (optional) -->
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<!-- Include DataTables JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<!-- Include DataTables Bootstrap CSS (optional) -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+<script>
+$(document).ready(function() {
+var table = $('#product-table').DataTable({
+"paging": true,
+"pageLength": 5,  // Set the initial number of rows per page
+"lengthMenu": [10, 25, 50, 100],  // Customize the "Show" dropdown options
+"dom": '<"top"lBf>t<"bottom"ip>',
+"buttons": [
+'pageLength',  // Add the "Select Rows Per Page" option
+'copy',
+'excel',
+'pdf',
+'print'
+]
+});
+
+// Add styling to the "Select Rows Per Page" dropdown
+$('.dataTables_length select').addClass('form-control form-control-sm');
+
+// Add a class to the "Select Rows Per Page" label
+$('.dataTables_length label').addClass('text-muted');
+});
+
+</script>
+
+{% endblock %}

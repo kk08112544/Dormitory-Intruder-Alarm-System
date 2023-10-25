@@ -1,0 +1,4 @@
+SELECT o.*
+FROM overview o
+LEFT JOIN read r ON o.ids = r.overview_id
+WHERE r.user_id IS NULL OR r.user_id !=2;

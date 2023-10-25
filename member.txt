@@ -1,0 +1,5 @@
+<form method="POST" action="/delete">
+  <input type="hidden" name="folder_name" value="{{ dataset }}">
+  <button type="submit" class="btn btn-warning">Delete</button>
+</form>
+{% endfor %}

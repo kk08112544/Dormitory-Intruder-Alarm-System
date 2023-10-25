@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- import bootstrap cdn-->
+    <link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity=
+"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <!-- import jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity=
+"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+    </script>
+    <!-- import popper.js cdn -->
+    <script src=
+"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity=
+"sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous">
+    </script>
+    <!-- import javascript cdn -->
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity=
+"sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous">
+    </script>
+    <!-- CSS stylesheet -->
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+        .PSU-logo {
+            width: 70px; /* กำหนดความกว้าง */
+            height: 100px; /* กำหนดความสูง */
+        }
+       .btn-pink {
+            background-color: #d63384;
+            
+        } 
+        .button {
+            background-color: #4CAF50; /* Green background color */
+            border: none; /* No border */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Padding around the text */
+            text-align: center; /* Center the text horizontally */
+            text-decoration: none; /* Remove underlines from the text */
+            display: inline-block; /* Display as an inline element */
+            font-size: 16px; /* Font size */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Add a cursor pointer on hover */
+          }
+          
+          /* Hover effect for the button */
+          .button:hover {
+            background-color: #45a049; /* Darker green background color on hover */
+          }
+    </style>
+</head>
+<body>
+    
+    <!-- This container contains the sidebar
+            and main content of the page -->
+    <!-- h-100 takes the full height of the body-->
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-2"  style="background-color: #0000FF">
+                <br>
+                <h4 class=" text-danger">Dormitory PSU</h4>
+                <br/>
+                <img src="static/images/PSU.png" class="PSU-logo" alt="Responsive image"  href="/home">
+                <!-- Navigation links in sidebar-->
+                <br/>
+                <br/>
+                <a href="/overview"><p class=" text-white">Overview</p></a>
+                <br/>
+              
+                <a href="/recognize"><p class=" text-white">Video Stream</p></a>
+                <br/>
+                
+                <a href="/show"><p class=" text-white">Member</p></a>
+                <br/>
+                <a href="/notify"><p class=" text-white">Notify</p></a>
+                <br/>
+                <a href="#"><p class=" text-white">_______________________________</p></a>
+                <br/>
+                <br/>
+                <a href="/"><p class=" text-white">Logout</p></a>
+            </div>
+            <div class="col-10" style="text-align: justify;">
+                <br>
+                <br>
+                <h2 class="text-center">Overview</h2>
+                
+                <br/>
+                <br/>
+            
+                <form  method="POST" style="display: flex; justify-content: center;">
+                    <input class="form-control"  type="date"id="search_date" name="search_date" style="width: 25%;" pattern="\d{4}-\d{2}-\d{2}" title="Enter a date in the format YYYY-MM-DD" required></input>
+                    <input type="submit" style="margin-left: 10px; background-color: #DC143C; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-size: 16px;">Search</input>
+                </form>
+                <br/>
+                <br/>
+                <h4 class="text-center">{{search_date}}</h4>
+
+                <div class="container mt-5">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name-Lastname</th>
+                                <th>Times</th>
+                            </tr>
+                        </thead>
+                        {% for product in products %}
+                        <tbody>
+                            <tr>
+                                <td>{{ product[0] }}</td>
+                                <td>{{ product[1] }}</td>
+                                <td>{{ product[4] }}</td>
+                                <td><button type="button" class="btn btn-danger">Edit</button></td>
+                                
+                            </tr>
+                          
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+          
+                </ul>
+                
+            
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Include Bootstrap JavaScript (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
